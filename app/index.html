@@ -8,21 +8,16 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Polymer Starter Kit">
   <title>Polymer Starter Kit</title>
-
   <!-- Place favicon.ico in the `app/` directory -->
-
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#2E3AA1">
-
   <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
 
@@ -57,6 +52,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
+  <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 </head>
 
 <body unresolved>
@@ -82,6 +78,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a data-route="users" href="{{baseUrl}}users">
             <iron-icon icon="info"></iron-icon>
             <span>Users</span>
+          </a>
+          
+          <a data-route="address" href="{{baseUrl}}address">
+            <iron-icon icon="account-box"></iron-icon>
+            <span>Address Book</span>
           </a>
 
           <a data-route="contact" href="{{baseUrl}}contact">
@@ -169,6 +170,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </paper-material>
             </section>
 
+           <section data-route="address">
+              <paper-material elevation="1" class="myContacts">
+                <h2 class="page-title">Address Book</h2>
+                <p>This is the address book section</p>
+                <my-contacts></my-contacts>
+              </paper-material>
+            </section>
+            
             <section data-route="contact">
               <paper-material elevation="1">
                 <h2 class="page-title">Contact</h2>
@@ -203,10 +212,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     -->
 
   </template>
-
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
 </body>
-
 </html>

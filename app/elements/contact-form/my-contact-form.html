@@ -1,0 +1,60 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<dom-module id="my-contact-form">
+    <template>
+        <style>
+        :host {
+        display: block;
+        }
+
+        span {
+        @apply(--paper-font-body1);
+        }
+
+        #formSuccess{
+        color:green;
+        font-size:1.3em;
+        display:none;
+        }
+         </style>
+        <form is="iron-form" id="addContactform" method="post" action="https://fiery-torch-87.firebaseio.com/contacts">
+          <paper-input name="name" label="Name" error-message="Please complete this field" auto-validate required></paper-input>
+            <paper-input name="address" label="Address" error-message="Please complete this field" auto-validate required></paper-input>
+            <paper-input name="telephone" label="Telephone Number" error-message="Please fill in a number"  auto-validate pattern="[0-9]*" required></paper-input>
+        <paper-button raised onclick="submitForm(event)">Submit</paper-button>
+        </form>
+        <span id="formSuccess">You have successfully added a contact.</span>
+     </template>
+      <script>
+      function submitForm(event) {
+        event.preventDefault();
+        var form = document.getElementById('addContactform');
+        var firebase = new Firebase(form.getAttribute('action'));
+        if(form.validate()){
+            firebase.push(form.serialize());
+            form.style.display = "none";
+            document.getElementById("formSuccess").style.display = "block";
+            setTimeout(function(){ 
+               form.reset();
+                form.style.display = "block";
+                document.getElementById("formSuccess").style.display = "none";
+            }, 2000);
+        }
+    }
+
+    (function() {
+    'use strict';
+        Polymer({
+            is: 'my-contact-form'
+        });
+    })();
+     </script>
+</dom-module>

@@ -18,19 +18,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
+    <link rel="import" href="../elements/elements.html">
   </head>
-
   <body>
-
+  <h1>Unit Test For Register Contact Form</h1>
+<my-contact-form></my-contact-form>
     <script>
       WCT.loadSuites([
-        'my-greeting-basic.html',
-        'my-greeting-basic.html?dom=shadow',
-        'my-list-basic.html',
-        'my-list-basic.html?dom=shadow'
+        'my-contact-form.html',
+        'my-contact-form.html?dom=shadow',
       ]);
     </script>
+  <script>
 
+  </script>
 
   </body>
 
