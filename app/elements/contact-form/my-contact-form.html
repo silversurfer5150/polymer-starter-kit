@@ -25,28 +25,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display:none;
         }
          </style>
+         <h2>Add a New Contact</h2>
+      <p>Please enter contact details below and click submit to save to firebase.</p>
         <form is="iron-form" id="addContactform" method="post" action="https://fiery-torch-87.firebaseio.com/contacts">
-          <paper-input name="name" label="Name" error-message="Please complete this field" auto-validate required></paper-input>
-            <paper-input name="address" label="Address" error-message="Please complete this field" auto-validate required></paper-input>
-            <paper-input name="telephone" label="Telephone Number" error-message="Please fill in a number"  auto-validate pattern="[0-9]*" required></paper-input>
-        <paper-button raised onclick="submitForm(event)">Submit</paper-button>
+          <paper-input id="contactName" name="name" label="Name" error-message="Please complete this field" auto-validate required></paper-input>
+            <paper-input id="contactAddress" name="address" label="Address" error-message="Please complete this field" auto-validate required></paper-input>
+            <paper-input id="contactNum" name="telephone" label="Telephone Number" error-message="Please fill in a number"  auto-validate pattern="[0-9 ]*" required></paper-input>
+        <paper-button raised onclick="submitForm(event)" id="submitButton">Submit</paper-button>
         </form>
         <span id="formSuccess">You have successfully added a contact.</span>
      </template>
       <script>
       function submitForm(event) {
         event.preventDefault();
-        var form = document.getElementById('addContactform');
+        var form = Polymer.dom(this.root).querySelector("my-contact-form").querySelector("#addContactform");
         var firebase = new Firebase(form.getAttribute('action'));
+        console.log(form);
         if(form.validate()){
-            firebase.push(form.serialize());
-            form.style.display = "none";
+                    form.style.display = "none";
             document.getElementById("formSuccess").style.display = "block";
-            setTimeout(function(){ 
+            firebase.push(form.serialize(), function() {
                form.reset();
+               document.getElementsByClassName("paper-input-error-0").style="display:none;";
                 form.style.display = "block";
                 document.getElementById("formSuccess").style.display = "none";
-            }, 2000);
+            });
         }
     }
 
